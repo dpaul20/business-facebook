@@ -1,6 +1,6 @@
 "use client";
 
-import { Linkedin, Megaphone, Users } from "lucide-react";
+import { Heart, Linkedin, Megaphone, Users } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,6 +16,7 @@ import UnifiedPostForm, {
 import CakeSelector from "@/components/cake-selector";
 import AchievementGarden from "@/components/achievement-garden";
 import { Navigation } from "@/components/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
 export interface SpecialPostProps {
   title: string;
@@ -62,6 +63,31 @@ const SpecialPost = ({
   );
 };
 
+// Nuevo componente para agregar mensajes de apreciación
+const AppreciationAdder = ({ onAdd }: { onAdd: (message: string) => void }) => {
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (message.trim()) {
+      onAdd(message);
+      setMessage("");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-4">
+      <Textarea
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Comparte un mensaje de apreciación, un recuerdo positivo o un reconocimiento..."
+        className="mb-2"
+      />
+      <Button type="submit">Agregar Apreciación</Button>
+    </form>
+  );
+};
+
 export default function Page() {
   const [cakeCount, setCakeCount] = useState<{ [key: string]: number }>({
     "🎂": 0,
@@ -71,6 +97,7 @@ export default function Page() {
     "🥮": 0,
     "🍮": 0,
   });
+  const [appreciations, setAppreciations] = useState<string[]>([]);
   const [plantedFlowers, setPlantedFlowers] = useState<
     { emoji: string; quality: string }[]
   >([]);
@@ -102,6 +129,10 @@ export default function Page() {
   const handleLinkedInPostSubmit = (post: LinkedInPost) => {
     // Here you would typically send the post to your backend
     console.log("LinkedIn post submitted:", post);
+  };
+
+  const handleAddAppreciation = (message: string) => {
+    setAppreciations((prevAppreciations) => [...prevAppreciations, message]);
   };
 
   return (
@@ -184,6 +215,54 @@ export default function Page() {
 
             {/* FilmViernes */}
             <FilmViernes />
+
+            {/* Publicación de aniversario */}
+            <Card className="mb-4 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900">
+              <CardHeader>
+                <div className="flex items-center">
+                  <Avatar className="mr-2">
+                    <AvatarImage
+                      src="/placeholder.svg?height=40&width=40"
+                      alt="@usuario"
+                    />
+                    <AvatarFallback>AM</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <CardTitle className="text-sm font-semibold">
+                      ¡5º Aniversario de Ana Martínez en TechCorp! 🎉
+                    </CardTitle>
+                    <p className="text-xs text-muted-foreground">
+                      Analista de Datos • 5 años en la empresa
+                    </p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="mb-4 text-lg">
+                  Celebremos los 5 años de Ana en TechCorp. ¡Comparte un mensaje
+                  de apreciación o un recuerdo positivo para crear su Mosaico de
+                  Apreciación!
+                </p>
+                <AppreciationAdder onAdd={handleAddAppreciation} />
+                <div className="mt-6">
+                  <h4 className="mb-2 text-lg font-semibold">
+                    Mosaico de Apreciación
+                  </h4>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {appreciations.map((message, index) => (
+                      <Card key={index} className="">
+                        <CardContent className="p-4">
+                          <div className="flex items-start space-x-2">
+                            <Heart className="mt-1 h-5 w-5 flex-shrink-0 text-red-500" />
+                            <p className="text-sm">{message}</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
             {/* Publicación de aniversario */}
             <Card className="mb-4 bg-gradient-to-r from-green-100 to-blue-100 dark:from-green-900 dark:to-blue-900">
