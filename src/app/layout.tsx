@@ -6,8 +6,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TechCorp Connect",
-  description: "Red social interna de TechCorp",
+  title: "Darwoft Connect",
+  description: "Red social interna de Darwoft",
 };
 
 export default function RootLayout({

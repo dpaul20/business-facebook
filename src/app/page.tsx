@@ -1,18 +1,17 @@
-import MusiMiercoles from "@/components/posts/MusiMiercoles";
-import FilmViernes from "@/components/posts/FilmViernes";
+import MusiMiercoles from "@/components/musi-miercoles/MusiMiercoles";
+import FilmViernes from "@/components/film-viernes/FilmViernes";
 import UnifiedPostForm from "@/components/forms/UnifiedPostForm";
 import LinkedInSideBar from "@/components/linkedin";
 import CommonPost from "@/components/posts/CommonPost";
 import BirthdayPost from "@/components/birthday/BirthdayPost";
 import SpecialPost from "@/components/posts/SpecialPost";
-import Anniversary from "@/components/anniversary/Index";
+import Anniversary from "@/components/anniversary/anniversary";
 import LeftSidebar from "@/components/sidebar/LeftSidebar";
 import Navigation from "@/components/Navigation";
 
-
 export default function Page() {
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-950 px-2">
+    <div className="min-h-screen bg-gray-100 px-2 dark:bg-gray-950">
       {/* Barra de navegación */}
       <Navigation />
 
@@ -28,10 +27,13 @@ export default function Page() {
             <UnifiedPostForm />
 
             {/* MusiMiércoles */}
-            <MusiMiercoles />
+            <MusiMiercoles mockIsToday={true} mockIsVotingClosed={false} />
+            <MusiMiercoles mockIsToday={true} mockIsVotingClosed={true} />
+
 
             {/* FilmViernes */}
-            <FilmViernes />
+            <FilmViernes mockIsToday={true} mockIsVotingClosed={false} />
+            <FilmViernes mockIsToday={true} mockIsVotingClosed={true} />
 
             {/* Publicación de aniversario */}
             <Anniversary />
