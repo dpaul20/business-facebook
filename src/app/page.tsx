@@ -7,13 +7,13 @@ import BirthdayPost from "@/components/birthday/BirthdayPost";
 import SpecialPost from "@/components/posts/SpecialPost";
 import Anniversary from "@/components/anniversary/anniversary";
 import LeftSidebar from "@/components/sidebar/LeftSidebar";
-import Navigation from "@/components/Navigation";
+import NavigationComponent from "@/components/NavigationComponent";
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-gray-100 px-2 dark:bg-gray-950">
       {/* Barra de navegación */}
-      <Navigation />
+      <NavigationComponent />
 
       {/* Contenido principal */}
       <main className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
@@ -29,7 +29,6 @@ export default function Page() {
             {/* MusiMiércoles */}
             <MusiMiercoles mockIsToday={true} mockIsVotingClosed={false} />
             <MusiMiercoles mockIsToday={true} mockIsVotingClosed={true} />
-
 
             {/* FilmViernes */}
             <FilmViernes mockIsToday={true} mockIsVotingClosed={false} />
