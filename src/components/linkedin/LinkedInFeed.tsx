@@ -32,7 +32,7 @@ export default function LinkedInFeed() {
         linkedinUrl:
           "https://www.linkedin.com/feed/update/urn:li:activity:7245225053158559746/",
         internalLikes: 5,
-        postedAt: "2023-09-26T21:28:00Z",
+        postedAt: "2024-09-26T21:28:00Z",
       },
       {
         id: "2",
@@ -42,7 +42,7 @@ export default function LinkedInFeed() {
           "¡Nueva oportunidad de trabajo en nuestra empresa! Compartan con sus contactos.",
         linkedinUrl: "https://www.linkedin.com/post/example-url-2",
         internalLikes: 3,
-        postedAt: "2023-09-26T20:15:00Z",
+        postedAt: "2024-09-26T20:15:00Z",
       },
     ]);
   }, []);

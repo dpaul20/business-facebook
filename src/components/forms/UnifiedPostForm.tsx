@@ -35,22 +35,15 @@ export type RegularPost = {
   postedAt: string;
 };
 
-type UnifiedPostFormProps = {
-  onRegularPostSubmit: (post: RegularPost) => void;
-  onLinkedInPostSubmit: (post: LinkedInPost) => void;
-  currentUser: {
-    name: string;
-    department: string;
-    hasSpecialPostPermission: boolean;
-    isRecruiter: boolean;
-  };
+// Simulación de un usuario con permisos especiales
+const currentUser = {
+  name: "Juan Pérez",
+  department: "Tecnología",
+  hasSpecialPostPermission: true,
+  isRecruiter: true, // Set this to true for recruiters, false for regular employees
 };
 
-export default function UnifiedPostForm({
-  onRegularPostSubmit,
-  onLinkedInPostSubmit,
-  currentUser,
-}: Readonly<UnifiedPostFormProps>) {
+export default function UnifiedPostForm() {
   const [regularPost, setRegularPost] = useState({
     content: "",
     type: "normal",
@@ -65,17 +58,7 @@ export default function UnifiedPostForm({
     e.preventDefault();
     if (!regularPost.content) return;
 
-    const post: RegularPost = {
-      id: Date.now().toString(),
-      author: currentUser.name,
-      department: currentUser.department,
-      content: regularPost.content,
-      type: regularPost.type as "normal" | "special",
-      title: regularPost.type === "special" ? regularPost.title : undefined,
-      postedAt: new Date().toISOString(),
-    };
-
-    onRegularPostSubmit(post);
+    // onRegularPostSubmit(post);
     setRegularPost({ content: "", type: "normal", title: "" });
   };
 
@@ -83,17 +66,7 @@ export default function UnifiedPostForm({
     e.preventDefault();
     if (!linkedInPost.content || !linkedInPost.linkedinUrl) return;
 
-    const post: LinkedInPost = {
-      id: Date.now().toString(),
-      author: currentUser.name,
-      department: currentUser.department,
-      content: linkedInPost.content,
-      linkedinUrl: linkedInPost.linkedinUrl,
-      internalLikes: 0,
-      postedAt: new Date().toISOString(),
-    };
-
-    onLinkedInPostSubmit(post);
+    // onLinkedInPostSubmit(post);
     setLinkedInPost({ content: "", linkedinUrl: "" });
   };
 
@@ -139,14 +112,14 @@ export default function UnifiedPostForm({
                 />
               )}
               <Textarea
-                placeholder="¿Qué está pasando en TechCorp?"
+                placeholder="¿Qué está pasando en Darwoft?"
                 value={regularPost.content}
                 onChange={(e) =>
                   setRegularPost({ ...regularPost, content: e.target.value })
                 }
                 className="mb-2"
               />
-              <div className="flex justify-between items-center mt-2">
+              <div className="mt-2 flex items-center justify-between">
                 <div>
                   <Button
                     type="button"
